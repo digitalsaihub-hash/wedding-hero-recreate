@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 import entryCard from "../assets/kalyana-mandapam/entry-card.jpg";
+import heroPoster from "../assets/kalyana-mandapam/hero-poster.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,6 +59,7 @@ function WeddingHero() {
           loop
           playsInline
           preload="auto"
+          poster={heroPoster}
           aria-hidden="true"
         >
           <source src="/hero-procession.mp4" type="video/mp4" />
