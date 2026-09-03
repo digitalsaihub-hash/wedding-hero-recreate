@@ -34,7 +34,9 @@ const splitName = (name: string) =>
 function WeddingHero() {
   const [isOpen, setIsOpen] = useState(false);
   const [coverGone, setCoverGone] = useState(false);
+  const [coupleVisible, setCoupleVisible] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const coupleRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -43,6 +45,24 @@ function WeddingHero() {
     const timer = window.setTimeout(() => setCoverGone(true), 1250);
     return () => window.clearTimeout(timer);
   }, [isOpen]);
+
+  useEffect(() => {
+    const section = coupleRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setCoupleVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   const openInvitation = () => {
     if (!isOpen) setIsOpen(true);
@@ -76,6 +96,48 @@ function WeddingHero() {
             <span className="hero-at">at</span>{" "}
             <span className="hero-location">ITC Mementos, Udaipur, Rajasthan, India</span>
           </p>
+        </div>
+      </section>
+
+      <section
+        ref={coupleRef}
+        className={`couple-section ${coupleVisible ? "couple-section--visible" : ""}`}
+        aria-labelledby="couple-title"
+      >
+        <div className="couple-inner">
+          <header className="couple-heading couple-reveal">
+            <span className="couple-flourish" aria-hidden="true">◆</span>
+            <h2 id="couple-title">The Couple</h2>
+            <p>Two families, many blessings, one timeless celebration.</p>
+          </header>
+
+          <div className="couple-details">
+            <article className="couple-person couple-person--groom couple-reveal">
+              <p className="couple-role">The Groom</p>
+              <h3>Vijay Deverakonda</h3>
+              <span className="couple-relation">Son of</span>
+              <p className="couple-parents">Deverakonda Govardhan Rao <span>&amp;</span> Deverakonda Madhavi</p>
+            </article>
+
+            <div className="couple-union couple-reveal" aria-hidden="true">
+              <span className="couple-union-line" />
+              <span className="couple-union-mark">&amp;</span>
+              <span className="couple-union-line" />
+            </div>
+
+            <article className="couple-person couple-person--bride couple-reveal">
+              <p className="couple-role">The Bride</p>
+              <h3>Rashmika Mandanna</h3>
+              <span className="couple-relation">Daughter of</span>
+              <p className="couple-parents">Madan Mandanna <span>&amp;</span> Suman Mandanna</p>
+            </article>
+          </div>
+
+          <div className="couple-closing couple-reveal" aria-hidden="true">
+            <span />
+            <i>शुभ विवाह</i>
+            <span />
+          </div>
         </div>
       </section>
 
