@@ -3,6 +3,15 @@ import { useEffect, useRef, useState } from "react";
 
 import entryCard from "../assets/kalyana-mandapam/entry-card.jpg";
 import heroPoster from "../assets/kalyana-mandapam/hero-poster.jpg";
+import cornerBlAsset from "../assets/couple-frame/corner-bl.png.asset.json";
+import cornerBrAsset from "../assets/couple-frame/corner-br.png.asset.json";
+import cornerTlAsset from "../assets/couple-frame/corner-tl.png.asset.json";
+import cornerTrAsset from "../assets/couple-frame/corner-tr.png.asset.json";
+import railBottomAsset from "../assets/couple-frame/rail-bottom.png.asset.json";
+import railLeftAsset from "../assets/couple-frame/rail-left.png.asset.json";
+import railRightAsset from "../assets/couple-frame/rail-right.png.asset.json";
+import railTopAsset from "../assets/couple-frame/rail-top.png.asset.json";
+import templeSceneryAsset from "../assets/couple-frame/temple-scenery.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -104,6 +113,17 @@ function WeddingHero() {
         className={`couple-section ${coupleVisible ? "couple-section--visible" : ""}`}
         aria-labelledby="couple-title"
       >
+        <img className="couple-scenery" src={templeSceneryAsset.url} alt="" aria-hidden="true" />
+        <div className="couple-frame" aria-hidden="true">
+          <img className="couple-rail couple-rail--top" src={railTopAsset.url} alt="" />
+          <img className="couple-rail couple-rail--right" src={railRightAsset.url} alt="" />
+          <img className="couple-rail couple-rail--bottom" src={railBottomAsset.url} alt="" />
+          <img className="couple-rail couple-rail--left" src={railLeftAsset.url} alt="" />
+          <img className="couple-corner couple-corner--tl" src={cornerTlAsset.url} alt="" />
+          <img className="couple-corner couple-corner--tr" src={cornerTrAsset.url} alt="" />
+          <img className="couple-corner couple-corner--bl" src={cornerBlAsset.url} alt="" />
+          <img className="couple-corner couple-corner--br" src={cornerBrAsset.url} alt="" />
+        </div>
         <div className="couple-inner">
           <header className="couple-heading couple-reveal">
             <span className="couple-flourish" aria-hidden="true">◆</span>
