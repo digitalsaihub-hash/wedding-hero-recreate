@@ -173,10 +173,12 @@ button, input, textarea, select { font: inherit; }
 
 .couple-frame { position: absolute; z-index: 2; inset: 0; overflow: hidden; pointer-events: none; }
 .couple-rail, .couple-corner { position: absolute; display: block; }
-.couple-rail--top, .couple-rail--bottom { left: 0; width: 100%; height: clamp(3.6rem, 7vw, 5.4rem); object-fit: fill; }
+.couple-rail { display: flex; overflow: hidden; }
+.couple-rail img { display: block; flex: 1 0 0; min-width: 0; min-height: 0; object-fit: fill; }
+.couple-rail--top, .couple-rail--bottom { left: 0; width: 100%; height: clamp(3.6rem, 7vw, 5.4rem); }
 .couple-rail--top { top: 0; }
 .couple-rail--bottom { bottom: 0; }
-.couple-rail--left, .couple-rail--right { top: 0; width: clamp(3.6rem, 7vw, 5.4rem); height: 100%; object-fit: fill; }
+.couple-rail--left, .couple-rail--right { top: 0; width: clamp(3.6rem, 7vw, 5.4rem); height: 100%; flex-direction: column; }
 .couple-rail--left { left: 0; }
 .couple-rail--right { right: 0; }
 .couple-corner { z-index: 3; width: clamp(3.6rem, 7vw, 5.4rem); height: clamp(3.6rem, 7vw, 5.4rem); object-fit: cover; }

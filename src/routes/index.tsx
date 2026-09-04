@@ -40,6 +40,9 @@ const splitName = (name: string) =>
     </span>
   ));
 
+const borderTiles = (source: string, count: number) =>
+  Array.from({ length: count }, (_, index) => <img src={source} alt="" key={index} />);
+
 function WeddingHero() {
   const [isOpen, setIsOpen] = useState(false);
   const [coverGone, setCoverGone] = useState(false);
@@ -115,10 +118,10 @@ function WeddingHero() {
       >
         <img className="couple-scenery" src={templeSceneryAsset.url} alt="" aria-hidden="true" />
         <div className="couple-frame" aria-hidden="true">
-          <img className="couple-rail couple-rail--top" src={railTopAsset.url} alt="" />
-          <img className="couple-rail couple-rail--right" src={railRightAsset.url} alt="" />
-          <img className="couple-rail couple-rail--bottom" src={railBottomAsset.url} alt="" />
-          <img className="couple-rail couple-rail--left" src={railLeftAsset.url} alt="" />
+          <div className="couple-rail couple-rail--top">{borderTiles(railTopAsset.url, 10)}</div>
+          <div className="couple-rail couple-rail--right">{borderTiles(railRightAsset.url, 14)}</div>
+          <div className="couple-rail couple-rail--bottom">{borderTiles(railBottomAsset.url, 10)}</div>
+          <div className="couple-rail couple-rail--left">{borderTiles(railLeftAsset.url, 14)}</div>
           <img className="couple-corner couple-corner--tl" src={cornerTlAsset.url} alt="" />
           <img className="couple-corner couple-corner--tr" src={cornerTrAsset.url} alt="" />
           <img className="couple-corner couple-corner--bl" src={cornerBlAsset.url} alt="" />
