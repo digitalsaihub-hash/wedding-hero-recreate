@@ -118,9 +118,9 @@ function WeddingHero() {
       >
         <img className="couple-scenery" src={templeSceneryAsset.url} alt="" aria-hidden="true" />
         <div className="couple-frame" aria-hidden="true">
-          <div className="couple-rail couple-rail--top">{borderTiles(railTopAsset.url, 10)}</div>
+          <div className="couple-rail couple-rail--top">{borderTiles(railTopAsset.url, 1)}</div>
           <div className="couple-rail couple-rail--right">{borderTiles(railRightAsset.url, 14)}</div>
-          <div className="couple-rail couple-rail--bottom">{borderTiles(railBottomAsset.url, 10)}</div>
+          <div className="couple-rail couple-rail--bottom">{borderTiles(railBottomAsset.url, 1)}</div>
           <div className="couple-rail couple-rail--left">{borderTiles(railLeftAsset.url, 14)}</div>
           <img className="couple-corner couple-corner--tl" src={cornerTlAsset.url} alt="" />
           <img className="couple-corner couple-corner--tr" src={cornerTrAsset.url} alt="" />
