@@ -186,6 +186,8 @@ function WeddingHero() {
         </div>
       </section>
 
+      <CountdownSection />
+
       {!coverGone && (
         <div
           className={`invitation-cover ${isOpen ? "invitation-cover--opening" : ""}`}
