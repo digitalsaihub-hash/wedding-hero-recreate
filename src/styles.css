@@ -311,7 +311,6 @@ button, input, textarea, select { font: inherit; }
 @keyframes couple-rise { to { opacity: 1; transform: translateY(0); } }
 
 .countdown-section {
-  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 5vw, 4rem);
   background: var(--parchment);
 }
 
@@ -326,8 +325,7 @@ button, input, textarea, select { font: inherit; }
 
 .countdown-wall {
   position: relative;
-  width: min(100%, 90rem);
-  margin: 0 auto;
+  width: 100%;
   container-type: inline-size;
 }
 
