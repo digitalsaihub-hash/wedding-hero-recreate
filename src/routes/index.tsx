@@ -228,3 +228,30 @@ function WeddingHero() {
     </main>
   );
 }
+
+function CountdownSection() {
+  const { days, hours, minutes, seconds } = useCountdown();
+  const cells = [
+    { value: String(days), label: "Days" },
+    { value: pad2(hours), label: "Hours" },
+    { value: pad2(minutes), label: "Minutes" },
+    { value: pad2(seconds), label: "Seconds" },
+  ];
+
+  return (
+    <section className="countdown-section" aria-labelledby="countdown-title">
+      <h2 id="countdown-title" className="countdown-sr">Our Muhurtham In</h2>
+      <div className="countdown-wall" role="timer" aria-label="Countdown to the wedding">
+        <img className="countdown-art" src={countdownWallAsset.url} alt="" aria-hidden="true" />
+        <div className="countdown-cells">
+          {cells.map((cell) => (
+            <div className="countdown-cell" key={cell.label}>
+              <span className="countdown-value">{cell.value}</span>
+              <span className="countdown-label">{cell.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
