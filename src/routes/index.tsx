@@ -12,6 +12,30 @@ import railLeftAsset from "../assets/couple-frame/rail-left.png.asset.json";
 import railRightAsset from "../assets/couple-frame/rail-right.png.asset.json";
 import railTopAsset from "../assets/couple-frame/rail-top.png.asset.json";
 import templeSceneryAsset from "../assets/couple-frame/temple-scenery.png.asset.json";
+import countdownWallAsset from "../assets/countdown/countdown-wall.webp.asset.json";
+
+const WEDDING_DATE = new Date("2026-10-26T00:00:00+05:30");
+
+const pad2 = (value: number) => String(value).padStart(2, "0");
+
+function useCountdown() {
+  const [remaining, setRemaining] = useState<number | null>(null);
+
+  useEffect(() => {
+    const update = () => setRemaining(WEDDING_DATE.getTime() - Date.now());
+    update();
+    const timer = window.setInterval(update, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const total = Math.max(0, remaining ?? 0);
+  return {
+    days: remaining === null ? "--" : String(Math.floor(total / 86_400_000)),
+    hours: remaining === null ? "--" : pad2(Math.floor(total / 3_600_000) % 24),
+    minutes: remaining === null ? "--" : pad2(Math.floor(total / 60_000) % 60),
+    seconds: remaining === null ? "--" : pad2(Math.floor(total / 1_000) % 60),
+  };
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -164,6 +188,8 @@ function WeddingHero() {
         </div>
       </section>
 
+      <CountdownSection />
+
       {!coverGone && (
         <div
           className={`invitation-cover ${isOpen ? "invitation-cover--opening" : ""}`}
@@ -202,5 +228,32 @@ function WeddingHero() {
         </div>
       )}
     </main>
+  );
+}
+
+function CountdownSection() {
+  const { days, hours, minutes, seconds } = useCountdown();
+  const cells = [
+    { value: days, label: "Days" },
+    { value: hours, label: "Hours" },
+    { value: minutes, label: "Minutes" },
+    { value: seconds, label: "Seconds" },
+  ];
+
+  return (
+    <section className="countdown-section" aria-labelledby="countdown-title">
+      <h2 id="countdown-title" className="countdown-sr">Our Muhurtham In</h2>
+      <div className="countdown-wall" role="timer" aria-label="Countdown to the wedding">
+        <img className="countdown-art" src={countdownWallAsset.url} alt="" aria-hidden="true" />
+        <div className="countdown-cells">
+          {cells.map((cell) => (
+            <div className="countdown-cell" key={cell.label}>
+              <span className="countdown-value">{cell.value}</span>
+              <span className="countdown-label">{cell.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
