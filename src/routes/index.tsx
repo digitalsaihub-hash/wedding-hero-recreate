@@ -19,19 +19,21 @@ const WEDDING_DATE = new Date("2026-10-26T00:00:00+05:30");
 const pad2 = (value: number) => String(value).padStart(2, "0");
 
 function useCountdown() {
-  const [remaining, setRemaining] = useState(() => WEDDING_DATE.getTime() - Date.now());
+  const [remaining, setRemaining] = useState<number | null>(null);
 
   useEffect(() => {
-    const timer = window.setInterval(() => setRemaining(WEDDING_DATE.getTime() - Date.now()), 1000);
+    const update = () => setRemaining(WEDDING_DATE.getTime() - Date.now());
+    update();
+    const timer = window.setInterval(update, 1000);
     return () => window.clearInterval(timer);
   }, []);
 
-  const total = Math.max(0, remaining);
+  const total = Math.max(0, remaining ?? 0);
   return {
-    days: Math.floor(total / 86_400_000),
-    hours: Math.floor(total / 3_600_000) % 24,
-    minutes: Math.floor(total / 60_000) % 60,
-    seconds: Math.floor(total / 1_000) % 60,
+    days: remaining === null ? "--" : String(Math.floor(total / 86_400_000)),
+    hours: remaining === null ? "--" : pad2(Math.floor(total / 3_600_000) % 24),
+    minutes: remaining === null ? "--" : pad2(Math.floor(total / 60_000) % 60),
+    seconds: remaining === null ? "--" : pad2(Math.floor(total / 1_000) % 60),
   };
 }
 
