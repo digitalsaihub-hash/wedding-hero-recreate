@@ -234,10 +234,10 @@ function WeddingHero() {
 function CountdownSection() {
   const { days, hours, minutes, seconds } = useCountdown();
   const cells = [
-    { value: String(days), label: "Days" },
-    { value: pad2(hours), label: "Hours" },
-    { value: pad2(minutes), label: "Minutes" },
-    { value: pad2(seconds), label: "Seconds" },
+    { value: days, label: "Days" },
+    { value: hours, label: "Hours" },
+    { value: minutes, label: "Minutes" },
+    { value: seconds, label: "Seconds" },
   ];
 
   return (
