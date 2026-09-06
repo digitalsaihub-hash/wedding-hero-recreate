@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CalendarDays, Clock3, MapPin, Share2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { Button } from "@/components/ui/button";
 import entryCard from "../assets/kalyana-mandapam/entry-card.jpg";
 import heroPoster from "../assets/kalyana-mandapam/hero-poster.jpg";
+import ceremonyCornerAsset from "../assets/ceremony/ceremony-corner.png.asset.json";
 import cornerBlAsset from "../assets/couple-frame/corner-bl.png.asset.json";
 import cornerBrAsset from "../assets/couple-frame/corner-br.png.asset.json";
 import cornerTlAsset from "../assets/couple-frame/corner-tl.png.asset.json";
@@ -189,6 +192,8 @@ function WeddingHero() {
       </section>
 
       <CountdownSection />
+      <AuspiciousHourSection />
+      <VenueSection />
 
       {!coverGone && (
         <div
@@ -252,6 +257,133 @@ function CountdownSection() {
               <span className="countdown-label">{cell.label}</span>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AuspiciousHourSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className={`muhurtham-section ceremonial-section ${isVisible ? "ceremonial-section--visible" : ""}`}
+      aria-labelledby="muhurtham-title"
+    >
+      <img className="muhurtham-art" src={ceremonyCornerAsset.url} alt="Traditional brass lamp, kalash and flowers" />
+      <div className="muhurtham-content">
+        <header className="ceremonial-heading ceremonial-reveal">
+          <p>Auspicious Hour</p>
+          <h2 id="muhurtham-title">Sumuhurtham</h2>
+          <span className="ceremonial-divider" aria-hidden="true"><i />◆<i /></span>
+        </header>
+
+        <div className="muhurtham-timeline ceremonial-reveal">
+          <span className="muhurtham-marker" aria-hidden="true"><i /></span>
+          <article className="muhurtham-card">
+            <span className="muhurtham-ribbon">Muhurtham</span>
+            <h3>Sumuhurtham (Muhurtham)</h3>
+            <p className="muhurtham-description">The sacred vows, followed by a traditional lunch.</p>
+            <div className="muhurtham-meta">
+              <p><CalendarDays aria-hidden="true" /> Monday, 26th October 2026</p>
+              <p><Clock3 aria-hidden="true" /> At the auspicious hour</p>
+              <p><MapPin aria-hidden="true" /> ITC Mementos · Udaipur</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VenueSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const mapsUrl = "https://maps.google.com/?q=ITC+Mementos+Udaipur+Rajasthan+India";
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  const shareLocation = async () => {
+    const shareData = { title: "Vijay & Rashmika's Wedding Venue", text: "ITC Mementos, Udaipur, Rajasthan, India", url: mapsUrl };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(mapsUrl);
+        setCopied(true);
+        window.setTimeout(() => setCopied(false), 1800);
+      }
+    } catch {
+      return;
+    }
+  };
+
+  return (
+    <section
+      ref={sectionRef}
+      className={`venue-section ceremonial-section ${isVisible ? "ceremonial-section--visible" : ""}`}
+      aria-labelledby="venue-title"
+    >
+      <div className="venue-inner">
+        <header className="ceremonial-heading ceremonial-reveal">
+          <p>The Venue</p>
+          <h2 id="venue-title">ITC Mementos</h2>
+          <span className="ceremonial-divider" aria-hidden="true"><i />◆<i /></span>
+          <address>Udaipur, Rajasthan, India</address>
+        </header>
+
+        <div className="venue-map ceremonial-reveal">
+          <iframe
+            title="Map showing ITC Mementos in Udaipur"
+            src="https://www.google.com/maps?q=ITC%20Mementos%20Udaipur%20Rajasthan%20India&output=embed"
+            width="100%"
+            height="320"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
+        <div className="venue-actions ceremonial-reveal">
+          <Button asChild variant="outline" className="venue-button venue-button--outline">
+            <a href={mapsUrl} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> Open in maps</a>
+          </Button>
+          <Button className="venue-button venue-button--solid" onClick={shareLocation}>
+            <Share2 aria-hidden="true" /> {copied ? "Location copied" : "Share location"}
+          </Button>
         </div>
       </div>
     </section>
