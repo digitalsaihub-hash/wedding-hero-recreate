@@ -365,9 +365,66 @@ button, input, textarea, select { font: inherit; }
   white-space: nowrap;
 }
 
+.ceremonial-section {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--parchment);
+  background-image:
+    radial-gradient(circle at 18% 22%, oklch(0.83 0.09 80 / .12) 0 2.5rem, transparent 2.6rem),
+    radial-gradient(circle at 78% 68%, oklch(0.83 0.09 80 / .1) 0 3.5rem, transparent 3.6rem),
+    repeating-radial-gradient(circle at center, oklch(0.66 0.07 86 / .09) 0 1px, transparent 1.5px 2.4rem);
+}
+
+.ceremonial-heading { text-align: center; }
+.ceremonial-heading > p { margin: 0 0 .8rem; font: 400 .7rem/1.5 Marcellus, serif; color: var(--maroon-deep); letter-spacing: .5em; text-indent: .5em; text-transform: uppercase; }
+.ceremonial-heading h2 { margin: 0; font: 400 clamp(3rem, 7vw, 4.7rem)/1.05 "Cormorant Garamond", serif; color: var(--maroon); letter-spacing: 0; }
+.ceremonial-divider { width: 5rem; margin: 1rem auto 0; display: flex; align-items: center; justify-content: center; gap: .45rem; color: var(--gold); font-size: .48rem; }
+.ceremonial-divider i { width: 1.65rem; height: 1px; background: linear-gradient(90deg, transparent, currentColor); }
+.ceremonial-divider i:last-child { transform: scaleX(-1); }
+.ceremonial-reveal { opacity: 0; transform: translateY(1.5rem); }
+.ceremonial-section--visible .ceremonial-reveal { animation: ceremonial-rise 1s cubic-bezier(.22,1,.36,1) forwards; }
+
+.muhurtham-section { min-height: 58rem; padding: clamp(7rem, 11vw, 9rem) 2rem; }
+.muhurtham-art { position: absolute; z-index: 1; left: -2.5rem; bottom: 0; width: min(38vw, 26rem); height: auto; pointer-events: none; animation: ceremonial-float 6s ease-in-out infinite; }
+.muhurtham-content { position: relative; z-index: 2; width: min(100%, 48rem); margin: 0 auto; padding-left: clamp(6rem, 17vw, 14rem); }
+.muhurtham-timeline { margin: 4.5rem auto 0; display: flex; flex-direction: column; align-items: center; animation-delay: .18s !important; }
+.muhurtham-marker { width: 1rem; height: 1rem; margin-bottom: 1.75rem; display: grid; place-items: center; border: 1px solid color-mix(in oklch, var(--gold) 70%, transparent); border-radius: 50%; background: var(--parchment); }
+.muhurtham-marker i { width: .48rem; height: .48rem; border-radius: 50%; background: var(--maroon); }
+.muhurtham-card { position: relative; width: min(100%, 28rem); padding: 1.75rem; border: 1px solid var(--gold); border-radius: 2px; text-align: left; background: linear-gradient(135deg, oklch(0.98 0.025 92), oklch(0.91 0.045 85 / .78)); box-shadow: 0 2.5rem 5rem -2.5rem oklch(0.24 0.09 26 / .35); }
+.muhurtham-ribbon { position: absolute; top: -.72rem; right: 1.5rem; padding: .22rem .85rem; background: var(--maroon); color: var(--primary-foreground); font: 400 .56rem/1.5 Marcellus, serif; letter-spacing: .36em; text-indent: .36em; text-transform: uppercase; }
+.muhurtham-card h3 { margin: 0 0 .85rem; max-width: 18rem; font: 400 clamp(1.75rem, 4vw, 2.35rem)/1.1 "Cormorant Garamond", serif; color: var(--maroon-deep); letter-spacing: 0; }
+.muhurtham-description { margin: 0; font: italic 400 .94rem/1.6 "Cormorant Garamond", serif; color: var(--ink); opacity: .78; }
+.muhurtham-meta { margin-top: 1.35rem; display: grid; gap: .65rem; }
+.muhurtham-meta p { margin: 0; display: flex; align-items: center; gap: .55rem; font: 400 .75rem/1.5 Marcellus, serif; color: var(--ink); }
+.muhurtham-meta svg { width: .9rem; height: .9rem; color: var(--gold); stroke-width: 1.6; }
+
+.venue-section { min-height: 58rem; padding: clamp(7rem, 11vw, 9rem) 1.5rem; }
+.venue-inner { position: relative; z-index: 1; width: min(100%, 42rem); margin: 0 auto; text-align: center; }
+.venue-section .ceremonial-heading address { max-width: 32rem; margin: 1.25rem auto 0; font: italic 400 clamp(1rem, 2vw, 1.22rem)/1.7 "Cormorant Garamond", serif; color: var(--ink); }
+.venue-map { margin-top: 2.5rem; overflow: hidden; border: 1px solid color-mix(in oklch, var(--gold) 50%, transparent); border-radius: 2px; box-shadow: 0 2.5rem 5rem -2.5rem oklch(0.24 0.09 26 / .32); animation-delay: .14s !important; }
+.venue-map iframe { display: block; border: 0; }
+.venue-actions { margin-top: 1.25rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; animation-delay: .28s !important; }
+.venue-button { height: 2.8rem; border-radius: 1px; padding-inline: 1.35rem; font: 400 .62rem/1 Marcellus, serif; letter-spacing: .3em; text-indent: .3em; text-transform: uppercase; }
+.venue-button--outline { border-color: var(--gold); background: transparent; color: var(--maroon-deep); box-shadow: none; }
+.venue-button--outline:hover { background: var(--maroon); color: var(--primary-foreground); }
+.venue-button--solid { background: var(--maroon); color: var(--primary-foreground); box-shadow: none; }
+.venue-button--solid:hover { background: var(--maroon-deep); }
+
+@keyframes ceremonial-rise { to { opacity: 1; transform: translateY(0); } }
+@keyframes ceremonial-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.65rem); } }
+
 @media (max-width: 680px) {
   .countdown-cells { top: 37%; left: 12.5%; right: 12.5%; height: 42%; gap: 3%; }
   .countdown-value { font-size: clamp(.9rem, 5.2cqw, 2rem); }
+  .muhurtham-section { min-height: 52rem; padding: 6.5rem 1.25rem 18rem; }
+  .muhurtham-content { padding-left: 0; }
+  .muhurtham-art { left: -2.5rem; width: min(68vw, 18rem); opacity: .72; }
+  .muhurtham-timeline { margin-top: 3.75rem; }
+  .muhurtham-card { padding: 1.5rem; }
+  .venue-section { min-height: auto; padding: 6.5rem 1.25rem 7rem; }
+  .venue-map iframe { height: 280px; }
+  .venue-actions { flex-direction: column; align-items: stretch; }
+  .venue-button { width: 100%; }
 }
 
 @media (max-aspect-ratio: 3 / 5) {
