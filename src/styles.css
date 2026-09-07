@@ -419,7 +419,7 @@ button, input, textarea, select { font: inherit; }
 .footer-blessings { margin-top: .18em !important; font: 400 clamp(1.3rem, 3.7cqw, 3rem)/1.25 "Great Vibes", cursive; }
 .footer-telugu { margin-top: .65em !important; font: 400 clamp(.7rem, 1.8cqw, 1.45rem)/1.4 Marcellus, serif; }
 .footer-invited { margin-top: 1.3em !important; font: 400 clamp(.62rem, 1.55cqw, 1.2rem)/1.55 "Cormorant Garamond", serif; color: var(--ink); }
-.footer-credit { position: absolute; z-index: 1; top: 37.5%; left: 50%; display: flex; flex-direction: column; align-items: center; gap: .45em; width: 72%; color: var(--maroon); text-align: center; text-decoration: none; transform: translateX(-50%); font: 400 clamp(.58rem, 1.65cqw, 1.25rem)/1.5 "Cormorant Garamond", serif; }
+.footer-credit { position: absolute; z-index: 1; top: 37.5%; left: 14%; display: flex; flex-direction: column; align-items: center; gap: .45em; width: 72%; color: var(--maroon); text-align: center; text-decoration: none; font: 400 clamp(.58rem, 1.65cqw, 1.25rem)/1.5 "Cormorant Garamond", serif; }
 .footer-credit strong { font-weight: 600; }
 .footer-credit span:last-child { text-decoration: underline; text-underline-offset: .2em; }
 .footer-reveal { opacity: 0; transform: translateY(1rem); }
