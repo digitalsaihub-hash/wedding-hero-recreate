@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import entryCard from "../assets/kalyana-mandapam/entry-card.jpg";
+import footerCard from "../assets/kalyana-mandapam/footer-card.jpg";
 import heroPoster from "../assets/kalyana-mandapam/hero-poster.jpg";
 import ceremonyCornerAsset from "../assets/ceremony/ceremony-corner.png.asset.json";
 import cornerBlAsset from "../assets/couple-frame/corner-bl.png.asset.json";
@@ -194,6 +195,7 @@ function WeddingHero() {
       <CountdownSection />
       <AuspiciousHourSection />
       <VenueSection />
+      <InvitationFooter />
 
       {!coverGone && (
         <div
@@ -387,5 +389,51 @@ function VenueSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function InvitationFooter() {
+  const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 },
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <footer ref={footerRef} className={`invitation-footer ${isVisible ? "invitation-footer--visible" : ""}`}>
+      <div className="footer-card">
+        <img className="footer-art" src={footerCard} alt="Traditional wedding ceremony at a South Indian temple" loading="lazy" />
+
+        <div className="footer-greeting">
+          <p className="footer-lead footer-reveal">We await your gracious presence</p>
+          <p className="footer-blessings footer-reveal">and your blessings</p>
+          <p className="footer-telugu footer-reveal">శుభమస్తు</p>
+          <p className="footer-invited footer-reveal">Invited by Pathange Swetha and Pathange Venkatesh</p>
+        </div>
+
+        <a
+          className="footer-credit footer-reveal"
+          href="https://myshaadhilink.in/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>This invitation was crafted on <strong>MyShaadhi Link</strong></span>
+          <span>Need one for your wedding? Click here</span>
+        </a>
+      </div>
+    </footer>
   );
 }
