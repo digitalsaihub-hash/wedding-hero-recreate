@@ -457,6 +457,138 @@ button, input, textarea, select { font: inherit; }
 @keyframes ceremonial-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.65rem); } }
 @keyframes footer-rise { to { opacity: 1; transform: translateY(0); } }
 
+.branding-section {
+  position: relative;
+  padding: clamp(5rem, 10vw, 8rem) 1.5rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, oklch(0.9 0.06 80 / .25) 0 12rem, transparent 14rem),
+    var(--parchment);
+}
+
+.branding-section::before,
+.branding-section::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: clamp(3rem, 8vw, 5rem);
+  background: linear-gradient(var(--gold), transparent);
+  transform: translateX(-50%);
+  opacity: .55;
+}
+
+.branding-section::before { top: 0; }
+.branding-section::after { bottom: 0; transform: translateX(-50%) scaleY(-1); }
+
+.branding-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 34rem);
+  padding: clamp(2.25rem, 6vw, 3.5rem) clamp(1.5rem, 5vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid color-mix(in oklch, var(--gold) 45%, transparent);
+  border-radius: 2px;
+  background: linear-gradient(180deg, oklch(0.98 0.02 90 / .95), oklch(0.94 0.045 85 / .82));
+  box-shadow:
+    0 2.5rem 5rem -2rem oklch(0.22 0.06 30 / .18),
+    inset 0 0 0 1px oklch(1 0 0 / .35);
+}
+
+.branding-ornament {
+  position: absolute;
+  top: -0.55rem;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: 0 .75rem;
+  font-size: .55rem;
+  color: var(--gold);
+  background: var(--parchment);
+  transform: translateX(-50%);
+}
+
+.branding-ornament i { width: 2rem; height: 1px; background: linear-gradient(90deg, transparent, currentColor); }
+.branding-ornament i:last-child { transform: scaleX(-1); }
+
+.branding-label {
+  margin: 0 0 .35rem;
+  font: 400 .65rem/1.5 Marcellus, serif;
+  letter-spacing: .42em;
+  text-indent: .42em;
+  text-transform: uppercase;
+  color: var(--temple-green);
+}
+
+.branding-name {
+  margin: 0 0 .9rem;
+  font: 400 clamp(2rem, 5.5vw, 3.2rem)/1.05 "Great Vibes", cursive;
+  color: var(--maroon-deep);
+}
+
+.branding-phone,
+.branding-email {
+  margin: 0;
+  font: 400 clamp(.85rem, 2vw, 1rem)/1.6 "Cormorant Garamond", serif;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.branding-phone { margin-bottom: .15rem; }
+.branding-email { margin-bottom: 1.5rem; }
+.branding-phone:hover,
+.branding-email:hover { color: var(--maroon); }
+
+.branding-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.branding-social-divider {
+  width: 1px;
+  height: 1.1rem;
+  background: linear-gradient(transparent, var(--gold), transparent);
+}
+
+.branding-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklch, var(--gold) 50%, transparent);
+  background: oklch(0.97 0.02 90 / .7);
+  color: var(--maroon-deep);
+  font: 400 .62rem/1 Marcellus, serif;
+  letter-spacing: .18em;
+  text-indent: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background .2s ease, transform .2s ease, border-color .2s ease;
+}
+
+.branding-social-link svg { width: .95rem; height: .95rem; color: var(--maroon); }
+.branding-social-link:hover { background: oklch(0.95 0.04 80 / .85); border-color: var(--gold); transform: translateY(-1px); }
+
+.branding-reveal { opacity: 0; transform: translateY(1.1rem); }
+.branding-section--visible .branding-reveal { animation: branding-rise .85s cubic-bezier(.22,1,.36,1) forwards; }
+.branding-section--visible .branding-name { animation-delay: .1s; }
+.branding-section--visible .branding-phone { animation-delay: .2s; }
+.branding-section--visible .branding-email { animation-delay: .28s; }
+.branding-section--visible .branding-social { animation-delay: .4s; }
+
+@keyframes branding-rise { to { opacity: 1; transform: translateY(0); } }
+
 @media (max-width: 680px) {
   .countdown-cells { top: 37%; left: 12.5%; right: 12.5%; height: 42%; gap: 3%; }
   .countdown-value { font-size: clamp(.9rem, 5.2cqw, 2rem); }
