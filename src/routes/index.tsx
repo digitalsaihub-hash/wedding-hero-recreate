@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, Clock3, MapPin, Share2 } from "lucide-react";
+import { CalendarDays, Clock3, Instagram, MapPin, Share2, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
