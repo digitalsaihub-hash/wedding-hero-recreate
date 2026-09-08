@@ -182,8 +182,30 @@ function WeddingHero() {
     if (!isOpen) setIsOpen(true);
   };
 
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play().then(() => setMusicPlaying(true)).catch(() => undefined);
+    } else {
+      audio.pause();
+      setMusicPlaying(false);
+    }
+  };
+
   return (
     <main className="wedding-experience">
+      <audio ref={audioRef} src={musicUrl} loop preload="auto" aria-hidden="true" />
+      {coverGone && (
+        <button
+          type="button"
+          className={`music-toggle ${musicPlaying ? "music-toggle--playing" : ""}`}
+          onClick={toggleMusic}
+          aria-label={musicPlaying ? "Pause music" : "Play music"}
+        >
+          {musicPlaying ? <Music aria-hidden="true" /> : <VolumeX aria-hidden="true" />}
+        </button>
+      )}
       <section className={`wedding-hero ${isOpen ? "wedding-hero--revealed" : ""}`} aria-label="Wedding invitation hero">
         <video
           ref={videoRef}
