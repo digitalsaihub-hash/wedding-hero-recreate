@@ -142,13 +142,20 @@ function WeddingHero() {
   const [isOpen, setIsOpen] = useState(false);
   const [coverGone, setCoverGone] = useState(false);
   const [coupleVisible, setCoupleVisible] = useState(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const coupleRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
     const video = videoRef.current;
     video?.play().catch(() => undefined);
+    const audio = audioRef.current;
+    if (audio) {
+      audio.volume = 0.6;
+      audio.play().then(() => setMusicPlaying(true)).catch(() => undefined);
+    }
     const timer = window.setTimeout(() => setCoverGone(true), 1250);
     return () => window.clearTimeout(timer);
   }, [isOpen]);
