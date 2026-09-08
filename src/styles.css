@@ -413,7 +413,7 @@ button, input, textarea, select { font: inherit; }
 .invitation-footer { width: 100%; overflow: hidden; background: var(--parchment); }
 .footer-card { position: relative; width: 100%; aspect-ratio: 951 / 1576; container-type: inline-size; }
 .footer-art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
-.footer-greeting { position: absolute; z-index: 1; top: 23%; left: 50%; width: 66%; text-align: center; transform: translateX(-50%); color: var(--maroon); }
+.footer-greeting { position: absolute; z-index: 1; top: 18%; left: 50%; width: 66%; text-align: center; transform: translateX(-50%); color: var(--maroon); }
 .footer-greeting p { margin: 0; }
 .footer-lead { font: 400 clamp(.72rem, 2.05cqw, 1.65rem)/1.5 "Cormorant Garamond", serif; color: var(--ink); }
 .footer-blessings { margin-top: .18em !important; font: 400 clamp(1.3rem, 3.7cqw, 3rem)/1.25 "Great Vibes", cursive; }
