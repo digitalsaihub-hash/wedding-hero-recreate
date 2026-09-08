@@ -1,22 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, Clock3, Instagram, MapPin, Share2, Youtube } from "lucide-react";
+import { CalendarDays, Clock3, Instagram, MapPin, Music, Share2, VolumeX, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import entryCard from "../assets/kalyana-mandapam/entry-card.jpg";
-import footerCard from "../assets/kalyana-mandapam/footer-card.jpg";
-import heroPoster from "../assets/kalyana-mandapam/hero-poster.jpg";
-import ceremonyCornerAsset from "../assets/ceremony/ceremony-corner.png.asset.json";
-import cornerBlAsset from "../assets/couple-frame/corner-bl.png.asset.json";
-import cornerBrAsset from "../assets/couple-frame/corner-br.png.asset.json";
-import cornerTlAsset from "../assets/couple-frame/corner-tl.png.asset.json";
-import cornerTrAsset from "../assets/couple-frame/corner-tr.png.asset.json";
-import railBottomAsset from "../assets/couple-frame/rail-bottom.png.asset.json";
-import railLeftAsset from "../assets/couple-frame/rail-left.png.asset.json";
-import railRightAsset from "../assets/couple-frame/rail-right.png.asset.json";
-import railTopAsset from "../assets/couple-frame/rail-top.png.asset.json";
-import templeSceneryAsset from "../assets/couple-frame/temple-scenery.png.asset.json";
-import countdownWallAsset from "../assets/countdown/countdown-wall.webp.asset.json";
+
+const ASSETS = "/assets";
+const entryCard = `${ASSETS}/entry-card.jpg`;
+const footerCard = `${ASSETS}/footer-card.jpg`;
+const heroPoster = `${ASSETS}/hero-poster.jpg`;
+const ceremonyCornerUrl = `${ASSETS}/ceremony-corner.png`;
+const cornerBlUrl = `${ASSETS}/corner-bl.png`;
+const cornerBrUrl = `${ASSETS}/corner-br.png`;
+const cornerTlUrl = `${ASSETS}/corner-tl.png`;
+const cornerTrUrl = `${ASSETS}/corner-tr.png`;
+const railBottomUrl = `${ASSETS}/rail-bottom.png`;
+const railLeftUrl = `${ASSETS}/rail-left.png`;
+const railRightUrl = `${ASSETS}/rail-right.png`;
+const railTopUrl = `${ASSETS}/rail-top.png`;
+const templeSceneryUrl = `${ASSETS}/temple-scenery.png`;
+const countdownWallUrl = `${ASSETS}/countdown-wall.webp`;
+const musicUrl = "/Kalyanam_Vibhogam.mp3";
 
 const WEDDING_DATE = new Date("2026-10-26T00:00:00+05:30");
 
