@@ -1,22 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, Clock3, Instagram, MapPin, Share2, Youtube } from "lucide-react";
+import { CalendarDays, Clock3, Instagram, MapPin, Music, Share2, VolumeX, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import entryCard from "../assets/kalyana-mandapam/entry-card.jpg";
-import footerCard from "../assets/kalyana-mandapam/footer-card.jpg";
-import heroPoster from "../assets/kalyana-mandapam/hero-poster.jpg";
-import ceremonyCornerAsset from "../assets/ceremony/ceremony-corner.png.asset.json";
-import cornerBlAsset from "../assets/couple-frame/corner-bl.png.asset.json";
-import cornerBrAsset from "../assets/couple-frame/corner-br.png.asset.json";
-import cornerTlAsset from "../assets/couple-frame/corner-tl.png.asset.json";
-import cornerTrAsset from "../assets/couple-frame/corner-tr.png.asset.json";
-import railBottomAsset from "../assets/couple-frame/rail-bottom.png.asset.json";
-import railLeftAsset from "../assets/couple-frame/rail-left.png.asset.json";
-import railRightAsset from "../assets/couple-frame/rail-right.png.asset.json";
-import railTopAsset from "../assets/couple-frame/rail-top.png.asset.json";
-import templeSceneryAsset from "../assets/couple-frame/temple-scenery.png.asset.json";
-import countdownWallAsset from "../assets/countdown/countdown-wall.webp.asset.json";
+
+const ASSETS = "/assets";
+const entryCard = `${ASSETS}/entry-card.jpg`;
+const footerCard = `${ASSETS}/footer-card.jpg`;
+const heroPoster = `${ASSETS}/hero-poster.jpg`;
+const ceremonyCornerUrl = `${ASSETS}/ceremony-corner.png`;
+const cornerBlUrl = `${ASSETS}/corner-bl.png`;
+const cornerBrUrl = `${ASSETS}/corner-br.png`;
+const cornerTlUrl = `${ASSETS}/corner-tl.png`;
+const cornerTrUrl = `${ASSETS}/corner-tr.png`;
+const railBottomUrl = `${ASSETS}/rail-bottom.png`;
+const railLeftUrl = `${ASSETS}/rail-left.png`;
+const railRightUrl = `${ASSETS}/rail-right.png`;
+const railTopUrl = `${ASSETS}/rail-top.png`;
+const templeSceneryUrl = `${ASSETS}/temple-scenery.png`;
+const countdownWallUrl = `${ASSETS}/countdown-wall.webp`;
+const musicUrl = "/Kalyanam_Vibhogam.mp3";
 
 const WEDDING_DATE = new Date("2026-10-26T00:00:00+05:30");
 
@@ -139,13 +142,20 @@ function WeddingHero() {
   const [isOpen, setIsOpen] = useState(false);
   const [coverGone, setCoverGone] = useState(false);
   const [coupleVisible, setCoupleVisible] = useState(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const coupleRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!isOpen) return;
     const video = videoRef.current;
     video?.play().catch(() => undefined);
+    const audio = audioRef.current;
+    if (audio) {
+      audio.volume = 0.6;
+      audio.play().then(() => setMusicPlaying(true)).catch(() => undefined);
+    }
     const timer = window.setTimeout(() => setCoverGone(true), 1250);
     return () => window.clearTimeout(timer);
   }, [isOpen]);
@@ -172,8 +182,30 @@ function WeddingHero() {
     if (!isOpen) setIsOpen(true);
   };
 
+  const toggleMusic = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play().then(() => setMusicPlaying(true)).catch(() => undefined);
+    } else {
+      audio.pause();
+      setMusicPlaying(false);
+    }
+  };
+
   return (
     <main className="wedding-experience">
+      <audio ref={audioRef} src={musicUrl} loop preload="auto" aria-hidden="true" />
+      {coverGone && (
+        <button
+          type="button"
+          className={`music-toggle ${musicPlaying ? "music-toggle--playing" : ""}`}
+          onClick={toggleMusic}
+          aria-label={musicPlaying ? "Pause music" : "Play music"}
+        >
+          {musicPlaying ? <Music aria-hidden="true" /> : <VolumeX aria-hidden="true" />}
+        </button>
+      )}
       <section className={`wedding-hero ${isOpen ? "wedding-hero--revealed" : ""}`} aria-label="Wedding invitation hero">
         <video
           ref={videoRef}
@@ -208,16 +240,16 @@ function WeddingHero() {
         className={`couple-section ${coupleVisible ? "couple-section--visible" : ""}`}
         aria-labelledby="couple-title"
       >
-        <img className="couple-scenery" src={templeSceneryAsset.url} alt="" aria-hidden="true" />
+        <img className="couple-scenery" src={templeSceneryUrl} alt="" aria-hidden="true" />
         <div className="couple-frame" aria-hidden="true">
-          <div className="couple-rail couple-rail--top">{borderTiles(railTopAsset.url, 16)}</div>
-          <div className="couple-rail couple-rail--right">{borderTiles(railRightAsset.url, 14)}</div>
-          <div className="couple-rail couple-rail--bottom">{borderTiles(railBottomAsset.url, 16)}</div>
-          <div className="couple-rail couple-rail--left">{borderTiles(railLeftAsset.url, 14)}</div>
-          <img className="couple-corner couple-corner--tl" src={cornerTlAsset.url} alt="" />
-          <img className="couple-corner couple-corner--tr" src={cornerTrAsset.url} alt="" />
-          <img className="couple-corner couple-corner--bl" src={cornerBlAsset.url} alt="" />
-          <img className="couple-corner couple-corner--br" src={cornerBrAsset.url} alt="" />
+          <div className="couple-rail couple-rail--top">{borderTiles(railTopUrl, 16)}</div>
+          <div className="couple-rail couple-rail--right">{borderTiles(railRightUrl, 14)}</div>
+          <div className="couple-rail couple-rail--bottom">{borderTiles(railBottomUrl, 16)}</div>
+          <div className="couple-rail couple-rail--left">{borderTiles(railLeftUrl, 14)}</div>
+          <img className="couple-corner couple-corner--tl" src={cornerTlUrl} alt="" />
+          <img className="couple-corner couple-corner--tr" src={cornerTrUrl} alt="" />
+          <img className="couple-corner couple-corner--bl" src={cornerBlUrl} alt="" />
+          <img className="couple-corner couple-corner--br" src={cornerBrUrl} alt="" />
         </div>
         <div className="couple-inner">
           <header className="couple-heading couple-reveal">
@@ -316,7 +348,7 @@ function CountdownSection() {
     <section className="countdown-section" aria-labelledby="countdown-title">
       <h2 id="countdown-title" className="countdown-sr">Our Muhurtham In</h2>
       <div className="countdown-wall" role="timer" aria-label="Countdown to the wedding">
-        <img className="countdown-art" src={countdownWallAsset.url} alt="" aria-hidden="true" />
+        <img className="countdown-art" src={countdownWallUrl} alt="" aria-hidden="true" />
         <div className="countdown-cells">
           {cells.map((cell) => (
             <div className="countdown-cell" key={cell.label}>
@@ -356,7 +388,7 @@ function AuspiciousHourSection() {
       className={`muhurtham-section ceremonial-section ${isVisible ? "ceremonial-section--visible" : ""}`}
       aria-labelledby="muhurtham-title"
     >
-      <img className="muhurtham-art" src={ceremonyCornerAsset.url} alt="Traditional brass lamp, kalash and flowers" />
+      <img className="muhurtham-art" src={ceremonyCornerUrl} alt="Traditional brass lamp, kalash and flowers" />
       <div className="muhurtham-content">
         <header className="ceremonial-heading ceremonial-reveal">
           <p>Auspicious Hour</p>
