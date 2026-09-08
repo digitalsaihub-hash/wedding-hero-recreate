@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CalendarDays, Clock3, MapPin, Share2 } from "lucide-react";
+import { CalendarDays, Clock3, Instagram, MapPin, Share2, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -196,6 +196,7 @@ function WeddingHero() {
       <AuspiciousHourSection />
       <VenueSection />
       <InvitationFooter />
+      <BrandingSection />
 
       {!coverGone && (
         <div
@@ -431,5 +432,69 @@ function InvitationFooter() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function BrandingSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className={`branding-section ${isVisible ? "branding-section--visible" : ""}`}
+      aria-labelledby="branding-title"
+    >
+      <div className="branding-card">
+        <div className="branding-ornament" aria-hidden="true"><i /><span>◆</span><i /></div>
+        <p className="branding-label branding-reveal">Captured by</p>
+        <h2 id="branding-title" className="branding-name branding-reveal">Passion Photography</h2>
+        <a className="branding-phone branding-reveal" href="tel:+919959990503">+91 99599 90503</a>
+        <a
+          className="branding-email branding-reveal"
+          href="mailto:Passionphotography7878@gmail.com"
+        >
+          Passionphotography7878@gmail.com
+        </a>
+
+        <div className="branding-social branding-reveal">
+          <a
+            className="branding-social-link"
+            href="https://www.instagram.com/passionphotography_in_kurnool"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Passion Photography on Instagram"
+          >
+            <Instagram aria-hidden="true" /> <span>Instagram</span>
+          </a>
+          <span className="branding-social-divider" aria-hidden="true" />
+          <a
+            className="branding-social-link"
+            href="https://www.youtube.com/@PassionPhotographyy"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Passion Photography on YouTube"
+          >
+            <Youtube aria-hidden="true" /> <span>YouTube</span>
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
