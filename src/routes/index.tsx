@@ -196,6 +196,7 @@ function WeddingHero() {
       <AuspiciousHourSection />
       <VenueSection />
       <InvitationFooter />
+      <BrandingSection />
 
       {!coverGone && (
         <div
