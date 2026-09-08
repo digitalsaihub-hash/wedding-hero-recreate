@@ -211,16 +211,16 @@ function WeddingHero() {
         className={`couple-section ${coupleVisible ? "couple-section--visible" : ""}`}
         aria-labelledby="couple-title"
       >
-        <img className="couple-scenery" src={templeSceneryAsset.url} alt="" aria-hidden="true" />
+        <img className="couple-scenery" src={templeSceneryUrl} alt="" aria-hidden="true" />
         <div className="couple-frame" aria-hidden="true">
-          <div className="couple-rail couple-rail--top">{borderTiles(railTopAsset.url, 16)}</div>
-          <div className="couple-rail couple-rail--right">{borderTiles(railRightAsset.url, 14)}</div>
-          <div className="couple-rail couple-rail--bottom">{borderTiles(railBottomAsset.url, 16)}</div>
-          <div className="couple-rail couple-rail--left">{borderTiles(railLeftAsset.url, 14)}</div>
-          <img className="couple-corner couple-corner--tl" src={cornerTlAsset.url} alt="" />
-          <img className="couple-corner couple-corner--tr" src={cornerTrAsset.url} alt="" />
-          <img className="couple-corner couple-corner--bl" src={cornerBlAsset.url} alt="" />
-          <img className="couple-corner couple-corner--br" src={cornerBrAsset.url} alt="" />
+          <div className="couple-rail couple-rail--top">{borderTiles(railTopUrl, 16)}</div>
+          <div className="couple-rail couple-rail--right">{borderTiles(railRightUrl, 14)}</div>
+          <div className="couple-rail couple-rail--bottom">{borderTiles(railBottomUrl, 16)}</div>
+          <div className="couple-rail couple-rail--left">{borderTiles(railLeftUrl, 14)}</div>
+          <img className="couple-corner couple-corner--tl" src={cornerTlUrl} alt="" />
+          <img className="couple-corner couple-corner--tr" src={cornerTrUrl} alt="" />
+          <img className="couple-corner couple-corner--bl" src={cornerBlUrl} alt="" />
+          <img className="couple-corner couple-corner--br" src={cornerBrUrl} alt="" />
         </div>
         <div className="couple-inner">
           <header className="couple-heading couple-reveal">
@@ -319,7 +319,7 @@ function CountdownSection() {
     <section className="countdown-section" aria-labelledby="countdown-title">
       <h2 id="countdown-title" className="countdown-sr">Our Muhurtham In</h2>
       <div className="countdown-wall" role="timer" aria-label="Countdown to the wedding">
-        <img className="countdown-art" src={countdownWallAsset.url} alt="" aria-hidden="true" />
+        <img className="countdown-art" src={countdownWallUrl} alt="" aria-hidden="true" />
         <div className="countdown-cells">
           {cells.map((cell) => (
             <div className="countdown-cell" key={cell.label}>
@@ -359,7 +359,7 @@ function AuspiciousHourSection() {
       className={`muhurtham-section ceremonial-section ${isVisible ? "ceremonial-section--visible" : ""}`}
       aria-labelledby="muhurtham-title"
     >
-      <img className="muhurtham-art" src={ceremonyCornerAsset.url} alt="Traditional brass lamp, kalash and flowers" />
+      <img className="muhurtham-art" src={ceremonyCornerUrl} alt="Traditional brass lamp, kalash and flowers" />
       <div className="muhurtham-content">
         <header className="ceremonial-heading ceremonial-reveal">
           <p>Auspicious Hour</p>
